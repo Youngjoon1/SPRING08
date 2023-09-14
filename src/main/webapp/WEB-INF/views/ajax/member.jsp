@@ -7,12 +7,16 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script type="text/javascript">
+	
+	let listSize;
+	
 	function getUsers() {
 		$.ajax({
 			url : "users",
 			type : "get",
 			dataType : "json",
 			success : function(list) {
+				listsize = list.length;
 				console.log(list);
 				let msg = "";
 				list.forEach((data)=>{
@@ -95,9 +99,31 @@
 	function delUser() {
 		$.ajax({
 			url : "delete/" + $("#id").val(),
-			type : "delete"
+			type : "delete",
+			success : () => {
+				test();
+			}
 		})
 	}
+	function test(){
+	      var end = setTimeout(test, "100");
+	      console.log("test");
+	      $.ajax({
+	         url : "users", type : "get", dataType : "json",
+	         success : function( list ){
+	            if(list.length != listSize ){
+	               let msg ="";
+	               list.forEach((data)=>{
+	                  msg += "<b>이름 : "+data.name+"</b><br>";
+	                  msg += "<b>나이 : "+data.age+"</b><hr>";
+	               })
+	               $("#data").html( msg );
+	               clearTimeout( end )
+	            }
+	         },
+	         error : () =>{ alert("문제 발생") }
+	      });
+	   }
 	
 </script>
 </head>
