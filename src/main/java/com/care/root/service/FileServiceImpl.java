@@ -90,6 +90,8 @@ public class FileServiceImpl implements FileService {
 		dto.setName(name);
 		File d = new File(IMAGE_REPO+"/"+mapper.getInfo(id).getImgName());
 		d.delete();
+		
+		
 		if(file.isEmpty() == false) {
 			SimpleDateFormat fo = new SimpleDateFormat("yyyyMMddHHmmss-");
 			String sysFileName = fo.format(new Date());
@@ -110,6 +112,38 @@ public class FileServiceImpl implements FileService {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public void modifyName(String id,String name,MultipartFile file,String OriId) {
+		FileDTO dto = new FileDTO();
+		
+		File d = new File(IMAGE_REPO+"/"+mapper.getInfo(OriId).getImgName());
+		d.delete();
+		dto.setId(OriId);
+		dto.setName(name);
+		if(file.isEmpty() == false) {
+			SimpleDateFormat fo = new SimpleDateFormat("yyyyMMddHHmmss-");
+			String sysFileName = fo.format(new Date());
+			sysFileName += file.getOriginalFilename();
+			File saveFile = new File(IMAGE_REPO + "/" +sysFileName);
+			try {
+				file.transferTo(saveFile);
+				dto.setImgName(sysFileName);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else {
+			dto.setImgName("nan");
+		}
+		try {
+			mapper.updateInfo(dto);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if(!OriId.equals(id)) {
+			dto.setId(id);
+			mapper.updateId(dto);
+		}
 	}
 	
 	

@@ -10,5 +10,9 @@
 </h1>
 
 <P>  The time on the server is ${serverTime}. </P>
+<a href="ajax01">ajax01</a>
+<a href="ajax02">ajax02</a>
+<a href="ajax03">ajax03</a>
+<a href="ajax04">ajax04</a>
 </body>
 </html>

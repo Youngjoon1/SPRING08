@@ -19,4 +19,6 @@ public interface FileService {
 	
 	public void modify(String id,String name,MultipartFile file);
 	
+	public void modifyName(String id,String name,MultipartFile file,String oriId);
+	
 }

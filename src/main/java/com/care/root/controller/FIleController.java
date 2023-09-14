@@ -97,6 +97,14 @@ public class FIleController {
 		return "redirect:views";
 	}
 	
+	@PostMapping("modifyName")
+	public String modifyName(@RequestParam String id,@RequestParam String name,@RequestParam MultipartFile file,@RequestParam String oriId) {
+		
+		fs.modifyName(id, name, file, oriId);
+		
+		
+		return "redirect:views";
+	}
 	
 	
 }

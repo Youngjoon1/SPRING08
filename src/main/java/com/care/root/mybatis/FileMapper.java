@@ -14,4 +14,6 @@ public interface FileMapper {
 	public FileDTO getInfo(String id);
 	
 	public void updateInfo(FileDTO dto);
+	
+	public void updateId(FileDTO dto);
 }

@@ -30,4 +30,9 @@
 	<update id="updateInfo">
 		UPDATE file_image SET name = #{name},img_Name = #{imgName} WHERE id = #{id}
 	</update>
+	
+	<update id="updateId">
+		UPDATE file_image SET id = #{id},img_Name = #{imgName} WHERE name = #{name}
+	</update>
+
 </mapper>
