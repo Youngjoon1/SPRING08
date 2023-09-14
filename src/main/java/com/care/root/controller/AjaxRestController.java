@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -51,6 +52,23 @@ public class AjaxRestController {
 	public InfoDTO getUser2(@PathVariable(value="aaa") String name) {
 		System.out.println("pathvar" + name);
 		return is.getUser(name);
+	}
+	
+	@PutMapping(value="modify", produces = "application/json; charset=utf-8")
+	public int modify(@RequestBody InfoDTO dto) {
+		int result = is.modify(dto);
+		return result;
+	}
+	
+	@PostMapping(value="insert",produces = "application/json; charset=utf-8")
+	public int insert(@RequestBody InfoDTO dto) {
+		int result = is.insert(dto);
+		return result;
+	}
+	
+	@DeleteMapping(value="delete/{uId}",produces = "application/json; charset=utf-8")
+	public void delete(@PathVariable String uId) {
+		is.delete(uId);
 	}
 }
 	

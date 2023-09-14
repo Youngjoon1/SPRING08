@@ -33,4 +33,32 @@ public class InfoService {
 	public InfoDTO getUser(String id) {
 		return DB.get(id);
 	}
+	
+	public int modify(InfoDTO dto) {
+		// update Å×ÀÌºí set ¾îÂ¼±¸ÀúÂ¼±¸
+		
+		DB.replace(dto.getName(), dto);
+		
+		return 1;
+	}
+	
+	public int insert(InfoDTO dto) {
+		DB.put(dto.getName(), dto);
+		list.add(dto);
+		
+		return 1;
+	}
+	
+	public void delete(String uId) {
+		DB.remove(uId);
+		for(int i=0; i <list.size(); i++) {
+			InfoDTO dto = list.get(i);
+			if(dto.getName().equals(uId)) {
+				list.remove(i);
+			}
+		}
+		
+	}
+	
+	
 }

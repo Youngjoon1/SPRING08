@@ -47,6 +47,58 @@
 			}
 		})
 	}
+	function modify() {
+		let modify = {}
+		let arr = $("#modify").serializeArray();
+		arr.forEach((data)=>{
+			modify[data.name] = data.value
+		})
+		console.log(modify);
+		$.ajax({
+			url : "modify", 
+			type : "put",
+			data : JSON.stringify( modify ),
+			contentType : "application/json; charset=utf-8",
+			dataType : "json",
+			success : (result) => {
+				if(result == 1)
+					alert("수정 되었습니다.")
+			},
+			error : () => {
+				alert("문제 발생!!!")
+			}
+		})
+	}
+	function insert() {
+		let modify = {}
+		let arr = $("#insert").serializeArray();
+		
+		arr.forEach((d)=>{
+			data[d.name] = d.value
+		})
+		
+		$.ajax({
+			url : "insert", 
+			type : "post",
+			data : JSON.stringify( data ),
+			contentType : "application/json; charset=utf-8",
+			dataType : "json",
+			success : (result) => {
+				if(result == 1)
+					alert("추가 되었습니다.")
+			},
+			error : () => {
+				alert("문제 발생!!!")
+			}
+		})
+	}
+	function delUser() {
+		$.ajax({
+			url : "delete/" + $("#id").val(),
+			type : "delete"
+		})
+	}
+	
 </script>
 </head>
 <body>
@@ -55,8 +107,23 @@
 	<br>
 	검색할 이름 : <input type="text" id="name"><br>
 	<button type="button" onclick="getUser()">하나데이터</button>
-	
-	
-	
+	<hr>
+	<h1>수정하기</h1>
+	<form id="modify">
+		<input type="text" name="name"><br>
+		<input type="text" name="age"><br>
+		<input type="button" value="수정" onclick="modify()">
+	</form>
+	<hr>
+	<h1>추가하기</h1>
+	<form id="insert">
+		<input type="text" name="name"><br>
+		<input type="text" name="age"><br>
+		<input type="button" value="추가" onclick="insert()">
+	</form>
+	<hr>
+	<h1>삭제하기</h1>
+	삭제할 이름 : <input type="text" id="id"><br>
+	<button type="button" onclick="delUser()">삭제하기</button>
 </body>
 </html>
